@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.List;
 
 import com.test.poker.Poker;
+import com.test.poker.methodRequest.SendMethodReQ;
 import com.test.poker.type.Type;
 import com.test.poker.validate.TypeValidation;
 
@@ -17,7 +18,15 @@ public class Player {
 	public List<Poker> handslist ;
 	public List<Poker> outlist = new ArrayList<Poker>();
 	public List<Poker> inlist = new ArrayList<Poker>();
+	public Type outType ;
+	public Type inType ;
 	
+	public Type getOutType() {
+		return outType;
+	}
+	public void setOutType(Type outType) {
+		this.outType = outType;
+	}
 	public String getPlayerName() {
 		return playerName;
 	}
@@ -37,7 +46,7 @@ public class Player {
 		this.isLandLord = isLandLord;
 	}
 	public Player(String playerName) {
-		this.handslist = LandlordReg.getPokers();
+		this.handslist = PokerDealer.getPokers();
 		this.playerName = playerName;
 	}
 	public void pointSort(){
@@ -48,6 +57,18 @@ public class Player {
 		System.out.println(handslist);
 	}
 	
+	public List<Poker> getOutlist() {
+		return outlist;
+	}
+	public void setOutlist(List<Poker> outlist) {
+		this.outlist = outlist;
+	}
+	public Type getInType() {
+		return inType;
+	}
+	public void setInType(Type inType) {
+		this.inType = inType;
+	}
 	public boolean isMyturn() {
 		return myturn;
 	}
@@ -63,36 +84,16 @@ public class Player {
 	public void play(Poker p){
 		outlist.add(p);
 		handslist.remove(p);
-		
-//		isVictory();
 	}
-	public boolean send(Player player){
-		if(inlist.size()==0){
-			Type type = TypeValidation.validate(outlist);
-			if(type==null){System.out.println("illegal cards:"+outlist); return false; }
-			System.out.println(this.playerName+" send cards:"+outlist.toString());
-			player.revieve(outlist);
-		}else{
-			Type type = TypeValidation.validate(inlist);
-			if(!type.validate(outlist)){System.out.println("illegal cards:"+outlist.toString());return false;}
-			type.setList(outlist);
-			if(!type.bigger(inlist)){
-				System.out.println("not bigger enough!");
-				return false; 
-			}
-			player.revieve(outlist);
-		}
+	public boolean send(Player reciever){
+		this.outType = TypeValidation.validate(outlist);
+		SendMethodReQ sendMR = new SendMethodReQ(this);
+		return sendMR.send(reciever);
+	}
+	public boolean revieve(Type outType){
+		this.setInType(outType);
+		System.out.println(this.playerName+" 接到牌:"+ outType);
 		return true;
 	}
-	public boolean revieve(List<Poker> list){
-		this.inlist.addAll(list);
-		this.setMyturn(true);
-		System.out.println(this.playerName+" recieve list:"+ list);
-		return true;
-	}
-	public boolean afterSend(){
-		this.myturn = false;
-		outlist.clear();
-		return true;
-	}
+	
 }

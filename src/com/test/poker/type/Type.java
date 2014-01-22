@@ -1,28 +1,44 @@
 package com.test.poker.type;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.test.poker.Poker;
 
 public abstract class Type {
-//	public static final int SINGLE = 1;//单
-//	public static final int PAIR = 2;//双
-//	public static final int TREBLE = 3;//三
-//	public static final int BOMB = 4;//炸弹
-//	public static final int fourWithTwo = 5;//四带二
-//	public static final int SEQUENCE = 6;//单顺
-//	public static final int SEQUENCE_DOUBLE = 6;//双顺
-//	public static final int threeWith= 6;// 3 - 1
-//	public static final int planeWith= 6; // 飞机 - 1
+	public static final int none = -1;// 单
+	public static final int single = 10;// 单
+	public static final int pair = 20;// 双
+	public static final int treble = 30;// 三
+	public static final int bomb = 1000;// 炸弹
+	public static final int kings = 2000;// 双王
+	public static final int fourWithTwo = 60;// 四带二
+	public static final int kingsWithTwo = 70;// 四带二
+	public static final int sequence = 80;// 单顺
+	public static final int sequenceDouble = 90;// 双顺
+	public static final int threeWithOne = 100;// 3 - 1
+	public static final int threeWithTwo = 110;// 3 - 1
+	public static final int planeWith = 120; // 飞机 - 1
 	
-	List<Poker> list;
+	public int name = Type.none;
+	List<Poker> list = new ArrayList<Poker>();
+
 	public abstract boolean bigger(List<Poker> list);
+
 	public abstract boolean validate(List<Poker> list);
+
 	public List<Poker> getList() {
 		return list;
 	}
+
 	public void setList(List<Poker> list) {
-		this.list = list;
+		this.list.addAll(list);
 	}
-	
+	public int getWeight(){
+		return name;
+	}
+	public String toString() {
+		return this.list.toString();
+	}
+
 }

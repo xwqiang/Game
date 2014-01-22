@@ -25,7 +25,9 @@ public class TypeValidation {
 		try {
 			for(Class<Type> c : typeList){
 				if(c.newInstance().validate(list)){
-					return c.newInstance();
+					Type type = c.newInstance();
+					type.setList(list);
+					return type;
 				}
 			}
 		} catch (Exception e) {

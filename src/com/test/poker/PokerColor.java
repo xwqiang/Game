@@ -2,7 +2,7 @@ package com.test.poker;
 
 public class PokerColor {
 	public static enum COLOR{
-		SPADE ,HEART ,CLUB ,DIAMOND
+		SPADE ,HEART ,CLUB ,DIAMOND,NONE,
 	}
 	public static String show(PokerColor.COLOR color){
 		switch(color){
@@ -13,8 +13,4 @@ public class PokerColor {
 		default: return "-1";
 		}
 	}
-//	public static final int SPADE = 1;//����
-//	public static final int HEART = 2;//����
-//	public static final int CLUB = 3;//÷��
-//	public static final int DIAMOND = 4;//��Ƭ
 }

@@ -1,30 +1,29 @@
 package com.test.poker.game;
 
 import com.test.poker.Poker;
+import com.test.poker.PokerPoint;
 import com.test.poker.PokerColor.COLOR;
 import com.test.poker.regular.Player;
 import com.test.poker.regular.PlayerFactory;
 
 public class GameCentre {
 	public static void main(String[] args){
-		Player p1 = null;
-		Player p2 = null;
-		Player p3 = null;
+		Player jack = null;
+		Player john = null;
 		try {
-			p1 = PlayerFactory.get("jack");
-			p2 = PlayerFactory.get("john");
-			p3 = PlayerFactory.get("miss");
+			jack = PlayerFactory.get("jack");
+			john = PlayerFactory.get("john");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		p1.play(new Poker(1,COLOR.CLUB));
-		p1.play(new Poker(1,COLOR.HEART));
-		p1.send(p2);
-		p1.afterSend();
+		jack.play(new Poker(PokerPoint.A,COLOR.CLUB));
+		jack.play(new Poker(PokerPoint.A,COLOR.HEART));
+		jack.play(new Poker(PokerPoint.A,COLOR.HEART));
+		jack.send(john);
 		
-		p2.play(new Poker(2,COLOR.CLUB));
-		p2.play(new Poker(2,COLOR.CLUB));
-		p2.send(p1);
-		p2.afterSend();
+		john.play(new Poker(PokerPoint.TWO,COLOR.CLUB));
+		john.play(new Poker(PokerPoint.TWO,COLOR.CLUB));
+		john.play(new Poker(PokerPoint.TWO,COLOR.CLUB));
+		john.send(jack);
 	}
 }

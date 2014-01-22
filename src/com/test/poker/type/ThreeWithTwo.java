@@ -7,10 +7,11 @@ import com.test.poker.Poker;
 import com.test.poker.regular.SequenceSort;
 
 public class ThreeWithTwo extends Type {
+	public ThreeWithTwo(){
+		name = Type.threeWithTwo;
+	}
 	@Override
 	public boolean bigger(List<Poker> list) {
-		if(this.list.size() ==2 ){return true;}
-		if(list.size() ==2 ){return false;}
 		if(getMain(this.list) > getMain(list)){
 			return true;
 		}
@@ -24,7 +25,12 @@ public class ThreeWithTwo extends Type {
 
 	@Override
 	public boolean validate(List<Poker> list) {
-		// TODO Auto-generated method stub
+		Collections.sort(list,new SequenceSort());
+		if(list.size()==5 && list.get(0).getPoint()==list.get(1).getPoint()&&list.get(3).getPoint()==list.get(4).getPoint()){
+			if(list.get(2).getPoint()==list.get(0).getPoint()||list.get(2).getPoint()==list.get(4).getPoint()){
+				return true;
+			}
+		}
 		return false;
 	}
 }

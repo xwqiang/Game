@@ -5,6 +5,9 @@ import java.util.List;
 import com.test.poker.Poker;
 
 public class Single extends Type {
+	public Single(){
+		name  = Type.single;
+	}
 	@Override
 	public boolean bigger(List<Poker> list) {
 		if(this.list.get(0).getPoint()>list.get(0).getPoint()){
@@ -15,7 +18,7 @@ public class Single extends Type {
 
 	@Override
 	public boolean validate(List<Poker> list) {
-		// TODO Auto-generated method stub
+		if(list.size()==1){return true;}
 		return false;
 	}
 }
