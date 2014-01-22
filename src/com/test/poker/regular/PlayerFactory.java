@@ -19,12 +19,4 @@ public class PlayerFactory {
 		playlist.add(player);
 		return player;
 	}
-	public static Player getTurn(){
-		for(Player p : playlist){
-			if(p.isMyturn()){
-				return p;
-			}
-		}
-		return null;
-	}
 }

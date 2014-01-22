@@ -11,9 +11,6 @@ import com.test.poker.validate.TypeValidation;
 
 public class Player {
 	private String playerName;
-	private int isReady;
-	private int isLandLord;
-	private boolean myturn;
 	
 	public List<Poker> handslist ;
 	public List<Poker> outlist = new ArrayList<Poker>();
@@ -32,18 +29,6 @@ public class Player {
 	}
 	public void setPlayerName(String playerName) {
 		this.playerName = playerName;
-	}
-	public int getIsReady() {
-		return isReady;
-	}
-	public void setIsReady(int isReady) {
-		this.isReady = isReady;
-	}
-	public int getIsLandLord() {
-		return isLandLord;
-	}
-	public void setIsLandLord(int isLandLord) {
-		this.isLandLord = isLandLord;
 	}
 	public Player(String playerName) {
 		this.handslist = PokerDealer.getPokers();
@@ -68,18 +53,6 @@ public class Player {
 	}
 	public void setInType(Type inType) {
 		this.inType = inType;
-	}
-	public boolean isMyturn() {
-		return myturn;
-	}
-	public void setMyturn(boolean myturn) {
-		this.myturn = myturn;
-	}
-	public boolean isVictory(){
-		if(handslist != null && handslist.size() ==0){
-			return true;
-		}
-		return false;
 	}
 	public void play(Poker p){
 		outlist.add(p);
