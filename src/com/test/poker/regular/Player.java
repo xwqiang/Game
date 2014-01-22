@@ -5,9 +5,10 @@ import java.util.Collections;
 import java.util.List;
 
 import com.test.poker.Poker;
+import com.test.poker.PokerColor;
+import com.test.poker.methodRequest.ISendMethodReQ;
 import com.test.poker.methodRequest.SendMethodReQ;
 import com.test.poker.type.Type;
-import com.test.poker.validate.TypeValidation;
 
 public class Player {
 	private String playerName;
@@ -32,6 +33,7 @@ public class Player {
 	}
 	public Player(String playerName) {
 		this.handslist = PokerDealer.getPokers();
+		Collections.sort(handslist,new SequenceSort());
 		this.playerName = playerName;
 	}
 	public void pointSort(){
@@ -39,7 +41,16 @@ public class Player {
 	}
 	public void showPokers(){
 		if(handslist == null || handslist.size() == 0){return ;}
-		System.out.println(handslist);
+		System.out.print("------->"+this.playerName+" [");
+		for(Poker p : handslist){
+			if(p.getStatus() == Poker.ready){
+				System.out.print(p + "  ");
+			}else{
+				System.err.print(p + "  ");
+			}
+		}
+		System.out.print("]");
+		System.out.println();
 	}
 	
 	public List<Poker> getOutlist() {
@@ -54,19 +65,38 @@ public class Player {
 	public void setInType(Type inType) {
 		this.inType = inType;
 	}
-	public void play(Poker p){
+	private void play(Poker p){
 		outlist.add(p);
-		handslist.remove(p);
+		p.setStatus(Poker.beforeSend);
+	}
+	public void play(int point){
+		for(Poker p : handslist){
+			if(p.getPoint() == point && p.getStatus() ==Poker.ready){
+				play(p);
+				break;
+			}
+		}
 	}
 	public boolean send(Player reciever){
-		this.outType = TypeValidation.validate(outlist);
-		SendMethodReQ sendMR = new SendMethodReQ(this);
+		ISendMethodReQ sendMR = new SendMethodReQ(this);
 		return sendMR.send(reciever);
 	}
 	public boolean revieve(Type outType){
 		this.setInType(outType);
-		System.out.println(this.playerName+" 接到牌:"+ outType);
 		return true;
 	}
-	
+	public static void main(String[] ar){
+		List<Poker> ll = new ArrayList<Poker>();
+		Poker p = new Poker(4,PokerColor.COLOR.CLUB);
+		ll.add(p);
+		System.out.println(ll);
+		p.setPoint(5);
+		p = null;
+		try {
+			Thread.sleep(1333);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		System.out.println(ll);
+	}
 }

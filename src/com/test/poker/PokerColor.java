@@ -10,7 +10,7 @@ public class PokerColor {
 		case HEART: return "红心";
 		case CLUB: return "梅花";
 		case DIAMOND: return "方片";
-		default: return "-1";
+		default: return "";
 		}
 	}
 }

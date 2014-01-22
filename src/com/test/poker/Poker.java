@@ -7,9 +7,11 @@ public class Poker {
 			PokerPoint.NINE,PokerPoint.TEN,PokerPoint.J ,PokerPoint.Q ,PokerPoint.K ,
 			PokerPoint.Joker0 ,PokerPoint.Joker1 
 			};
+	public static final int ready = 0;
+	public static final int beforeSend = 2;
 	private PokerColor.COLOR color;
 	private int point;
-	private int status;//0 未发牌 1 已发 2 弃牌
+	private int status;//0 已发牌 2 准备出牌 3 弃牌 
 	public Poker(int point, PokerColor.COLOR color) {
 		for(int i = 0 ; i < ptInt.length ; i++){
 			if(point == ptInt[i]){

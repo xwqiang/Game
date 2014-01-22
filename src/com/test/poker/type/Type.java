@@ -6,6 +6,9 @@ import java.util.List;
 import com.test.poker.Poker;
 
 public abstract class Type {
+	/**
+	 * 定义了类型的权值 用于不同类型的牌进行比较
+	 */
 	public static final int none = -1;// 单
 	public static final int single = 10;// 单
 	public static final int pair = 20;// 双
@@ -31,7 +34,7 @@ public abstract class Type {
 		return list;
 	}
 
-	public void setList(List<Poker> list) {
+	public void cloneList(List<Poker> list) {
 		this.list.addAll(list);
 	}
 	public int getWeight(){

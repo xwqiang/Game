@@ -26,7 +26,7 @@ public class TypeValidation {
 			for(Class<Type> c : typeList){
 				if(c.newInstance().validate(list)){
 					Type type = c.newInstance();
-					type.setList(list);
+					type.cloneList(list);
 					return type;
 				}
 			}
@@ -92,11 +92,4 @@ public class TypeValidation {
         }  
         return classes;
     }  
-  
-
-
-	public static void main(String[] args) {
-		TypeValidation t = new TypeValidation();
-		t.validate(null);
-	}
 }
