@@ -15,30 +15,42 @@ public class GameCentre {
 			e.printStackTrace();
 		}
 		
-		jack.showPokers();
+//		//jack.showPokers();
 		jack.play(PokerPoint.THREE);
 		jack.play(PokerPoint.THREE);
 		jack.play(PokerPoint.THREE);
+		jack.play(PokerPoint.FOUR);
+		jack.play(PokerPoint.FOUR);
+		jack.play(PokerPoint.FOUR);
+//		jack.play(PokerPoint.SIX);
+		jack.play(PokerPoint.FIVE);
+		jack.play(PokerPoint.FIVE);
+		jack.play(PokerPoint.FIVE);
 		jack.send(john);
-		jack.showPokers();
+//		//jack.showPokers();
 		
 		System.out.println();
 		
-		john.showPokers();
-		john.play(PokerPoint.TWO);
-		john.play(PokerPoint.TWO);
-		john.play(PokerPoint.TWO);
+//		john.showPokers();
+		john.play(PokerPoint.FOUR);
+		john.play(PokerPoint.FOUR);
+		john.play(PokerPoint.FOUR);
+		john.play(PokerPoint.FIVE);
+		john.play(PokerPoint.FIVE);
+		john.play(PokerPoint.FIVE);
+		john.play(PokerPoint.SIX);
+		john.play(PokerPoint.SIX);
+		john.play(PokerPoint.SIX);
 		john.send(jack);
-		john.showPokers();
+//		john.showPokers();
 		
 		System.out.println();
 		
-		jack.showPokers();
-		jack.play(PokerPoint.SIX);
-		jack.play(PokerPoint.SIX);
-		jack.play(PokerPoint.SIX);
+		//jack.showPokers();
+		jack.play(PokerPoint.Joker0);
+		jack.play(PokerPoint.Joker1);
 		jack.send(john);
-		jack.showPokers();
+		//jack.showPokers();
 		
 		System.out.println();
 	}

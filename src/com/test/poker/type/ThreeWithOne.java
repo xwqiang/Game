@@ -4,7 +4,7 @@ import java.util.Collections;
 import java.util.List;
 
 import com.test.poker.Poker;
-import com.test.poker.regular.SequenceSort;
+import com.test.poker.util.SequenceSort;
 
 public class ThreeWithOne extends Type {
 	public ThreeWithOne(){

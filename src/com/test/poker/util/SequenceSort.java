@@ -1,4 +1,4 @@
-package com.test.poker.regular;
+package com.test.poker.util;
 
 import java.util.Comparator;
 

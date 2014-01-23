@@ -6,9 +6,11 @@ import java.util.List;
 
 import com.test.poker.Poker;
 import com.test.poker.PokerColor;
+import com.test.poker.PokerPoint;
 import com.test.poker.methodRequest.ISendMethodReQ;
 import com.test.poker.methodRequest.SendMethodReQ;
 import com.test.poker.type.Type;
+import com.test.poker.util.SequenceSort;
 
 public class Player {
 	private String playerName;
@@ -70,12 +72,13 @@ public class Player {
 		p.setStatus(Poker.beforeSend);
 	}
 	public void play(int point){
-		for(Poker p : handslist){
-			if(p.getPoint() == point && p.getStatus() ==Poker.ready){
-				play(p);
-				break;
-			}
-		}
+		play(new Poker(point,PokerColor.COLOR.CLUB));
+//		for(Poker p : handslist){
+//			if(p.getPoint() == point && p.getStatus() ==Poker.ready){
+//				play(p);
+//				break;
+//			}
+//		}
 	}
 	public boolean send(Player reciever){
 		ISendMethodReQ sendMR = new SendMethodReQ(this);
