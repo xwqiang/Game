@@ -96,6 +96,13 @@ public class PokerCentre {
 		int i = (int) (Math.random()*pokerLeft.size());
 		return pokerLeft.remove(i);
 	}
+	public static List<Poker> getPokers(){
+ 		List<Poker> yourPokers = new ArrayList<Poker>();
+		for(int i = 0 ; i < 18 ; i ++){
+			yourPokers.add(new PokerCentre().get());
+		}
+		return yourPokers;
+	}
 	public static void main(String[] a){
 		PokerCentre c = new PokerCentre();
 		Poker p = c.get();

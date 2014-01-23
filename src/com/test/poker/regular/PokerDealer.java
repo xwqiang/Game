@@ -10,20 +10,37 @@ import com.test.poker.Poker;
  *
  */
 public class PokerDealer {
-	
-	public static List<Poker> getPokers(){
- 		List<Poker> yourPokers = new ArrayList<Poker>();
-		for(int i = 0 ; i < 18 ; i ++){
-			yourPokers.add(new PokerCentre().get());
-		}
-		return yourPokers;
+	private List<Poker> list = new ArrayList<Poker>();
+	public PokerDealer(List<Poker> handslist) {
+		this.list = handslist;
 	}
+	
 	public List<Poker> landLord() throws Exception{
 		List<Poker> list = PokerCentre.getPokerLeft();
 		if(list.size() != 3){
 			throw new Exception("pokers haven't sended");
 		}
 		return PokerCentre.getPokerLeft();
+	}
+	
+	/**
+	 * 出牌结束后更改状态
+	 * @param list
+	 */
+	public void confirmSending(){
+		for(Poker p : this.list){
+			if(p.getStatus() == Poker.beforeSend){
+				p.setStatus(Poker.afterSend);
+			}
+		}
+	}
+	
+	public  void cancelSending(){
+		for(Poker p : this.list){
+			if(p.getStatus() == Poker.beforeSend){
+				p.setStatus(Poker.ready);
+			}
+		}
 	}
 //	public boolean validate(List<Poker> pokers){
 //		if(pokers == null || pokers.size() ==0){return false;}

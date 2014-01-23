@@ -1,6 +1,5 @@
 package com.test.poker.game;
 
-import com.test.poker.PokerPoint;
 import com.test.poker.regular.Player;
 import com.test.poker.regular.PlayerFactory;
 
@@ -8,50 +7,29 @@ public class GameCentre {
 	public static void main(String[] args){
 		Player jack = null;
 		Player john = null;
+		Player yalin = null;
 		try {
 			jack = PlayerFactory.get("jack");
+			jack.setLandLord(true);
 			john = PlayerFactory.get("john");
+			yalin = PlayerFactory.get("yalin");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		Sender sender = new Sender();
+//		while(PlayerFactory.now().handSize() > 0){
+//			sender.setPlayer(PlayerFactory.now());
+//			sender.send(PlayerFactory.next());
+//		}
+		for(int i = 0 ; i< 3; i++){
+			System.out.println(PlayerFactory.now().getPlayerName());
+			System.out.println(PlayerFactory.next().getPlayerName());
+		}
 		
-//		//jack.showPokers();
-		jack.play(PokerPoint.THREE);
-		jack.play(PokerPoint.THREE);
-		jack.play(PokerPoint.THREE);
-		jack.play(PokerPoint.FOUR);
-		jack.play(PokerPoint.FOUR);
-		jack.play(PokerPoint.FOUR);
-//		jack.play(PokerPoint.SIX);
-		jack.play(PokerPoint.FIVE);
-		jack.play(PokerPoint.FIVE);
-		jack.play(PokerPoint.FIVE);
-		jack.send(john);
-//		//jack.showPokers();
 		
-		System.out.println();
 		
-//		john.showPokers();
-		john.play(PokerPoint.FOUR);
-		john.play(PokerPoint.FOUR);
-		john.play(PokerPoint.FOUR);
-		john.play(PokerPoint.FIVE);
-		john.play(PokerPoint.FIVE);
-		john.play(PokerPoint.FIVE);
-		john.play(PokerPoint.SIX);
-		john.play(PokerPoint.SIX);
-		john.play(PokerPoint.SIX);
-		john.send(jack);
-//		john.showPokers();
-		
-		System.out.println();
-		
-		//jack.showPokers();
-		jack.play(PokerPoint.Joker0);
-		jack.play(PokerPoint.Joker1);
-		jack.send(john);
-		//jack.showPokers();
 		
 		System.out.println();
 	}
+	
 }

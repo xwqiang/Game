@@ -2,20 +2,20 @@ package com.test.poker.type;
 
 
 public class TypeWrapper {
-	private Type type ; 
+	private Type pokerType ; 
 	public TypeWrapper(Type type){
-		this.type = type;
+		this.pokerType = type;
 	}
 	public boolean biggerThan(Type inType){
-		if(this.type.getClass() != inType.getClass()){
+		if(this.pokerType.getClass() != inType.getClass()){
 			return diffTypeCompare(inType);
 		}else{
-			return this.type.bigger(inType.getList());
+			return this.pokerType.bigger(inType.getList());
 		}
 	}
 	private boolean diffTypeCompare(Type inType){
-		if(isBomb(this.type) || isBomb(inType)){
-			return this.type.getWeight() > inType.getWeight();
+		if(isBomb(this.pokerType) || isBomb(inType)){
+			return this.pokerType.getWeight() > inType.getWeight();
 		}
 		return false;
 	}

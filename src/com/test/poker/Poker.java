@@ -7,8 +7,18 @@ public class Poker {
 			PokerPoint.NINE,PokerPoint.TEN,PokerPoint.J ,PokerPoint.Q ,PokerPoint.K ,
 			PokerPoint.Joker0 ,PokerPoint.Joker1 
 			};
+	/**
+	 * 就绪状态（手牌）
+	 */
 	public static final int ready = 0;
+	/**
+	 * 选出牌 还未出牌
+	 */
 	public static final int beforeSend = 2;
+	/**
+	 * 牌已经打出
+	 */
+	public static final int afterSend = 2;
 	private PokerColor.COLOR color;
 	private int point;
 	private int status;//0 已发牌 2 准备出牌 3 弃牌 
@@ -24,7 +34,6 @@ public class Poker {
 				throw new Exception("no such point " + point);
 			} catch (Exception e) {
 				e.printStackTrace();
-				System.exit(0);
 			}
 		}
 		this.color = color;

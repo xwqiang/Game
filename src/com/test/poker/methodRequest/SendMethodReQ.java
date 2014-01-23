@@ -22,10 +22,9 @@ public class SendMethodReQ implements ISendMethodReQ{
 	 * @see com.test.poker.methodRequest.ISendMethodReQ#beforeSend()
 	 */
 	
-	public boolean beforeSend(Player reciever){
+	public boolean beforeSend(Player reciever) throws Exception{
 		if(sender.getOutType()==null){
-			System.out.println(sender.getPlayerName()+" 不合法出牌"+sender.getOutType());
-			return false;
+			throw new Exception(sender.getPlayerName()+" 不合法出牌"+sender.getOutType());
 		}
 		
 		if(!canSend(reciever)){
@@ -54,16 +53,16 @@ public class SendMethodReQ implements ISendMethodReQ{
 	 */
 	public boolean afterSend(){
 		sender.getOutlist().clear();
+		sender.getPokerDealer().confirmSending();
 		return true;
 	}
 	
 	/* (non-Javadoc)
 	 * @see com.test.poker.methodRequest.ISendMethodReQ#send(com.test.poker.regular.Player)
 	 */
-	public boolean send(Player reciever){
-		if(beforeSend(reciever)){
-			System.out.println(sender.getPlayerName()+" 出牌："+sender.getOutType());
-		}
+	public boolean send(Player reciever) throws Exception{
+		beforeSend(reciever);
+		System.out.println(sender.getPlayerName()+" 出牌："+sender.getOutType());
 		reciever.revieve(sender.getOutType());
 		afterSend();
 		return true;

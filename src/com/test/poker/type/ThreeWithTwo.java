@@ -1,5 +1,5 @@
-package com.test.poker.type;
 
+package com.test.poker.type;
 import java.util.Collections;
 import java.util.List;
 

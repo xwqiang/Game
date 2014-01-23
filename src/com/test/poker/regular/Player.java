@@ -6,7 +6,6 @@ import java.util.List;
 
 import com.test.poker.Poker;
 import com.test.poker.PokerColor;
-import com.test.poker.PokerPoint;
 import com.test.poker.methodRequest.ISendMethodReQ;
 import com.test.poker.methodRequest.SendMethodReQ;
 import com.test.poker.type.Type;
@@ -14,13 +13,36 @@ import com.test.poker.util.SequenceSort;
 
 public class Player {
 	private String playerName;
+	private PokerDealer pokerDealer;
 	
+	private boolean isLandLord;
 	public List<Poker> handslist ;
 	public List<Poker> outlist = new ArrayList<Poker>();
 	public List<Poker> inlist = new ArrayList<Poker>();
 	public Type outType ;
 	public Type inType ;
 	
+	public int handSize(){
+		int i = 0 ;
+		for(Poker poker : handslist){
+			if(poker.getStatus() == Poker.ready){
+				i++;
+			}
+		}
+		return i;
+	}
+	public boolean isLandLord() {
+		return isLandLord;
+	}
+	public void setLandLord(boolean isLandLord) {
+		this.isLandLord = isLandLord;
+	}
+	public PokerDealer getPokerDealer() {
+		return pokerDealer;
+	}
+	public void setPokerDealer(PokerDealer pokerDealer) {
+		this.pokerDealer = pokerDealer;
+	}
 	public Type getOutType() {
 		return outType;
 	}
@@ -34,25 +56,28 @@ public class Player {
 		this.playerName = playerName;
 	}
 	public Player(String playerName) {
-		this.handslist = PokerDealer.getPokers();
+		this.handslist = PokerCentre.getPokers();
 		Collections.sort(handslist,new SequenceSort());
 		this.playerName = playerName;
+		pokerDealer = new PokerDealer(handslist);
 	}
 	public void pointSort(){
 		Collections.sort(handslist,new SequenceSort());
 	}
-	public void showPokers(){
-		if(handslist == null || handslist.size() == 0){return ;}
-		System.out.print("------->"+this.playerName+" [");
+	public String showPokers(){
+		String show = "";
+		if(handslist == null || handslist.size() == 0){return "";}
+		show +=" [";
 		for(Poker p : handslist){
-			if(p.getStatus() == Poker.ready){
-				System.out.print(p + "  ");
+			if(p.getStatus() != Poker.afterSend){
+				show +=p + "\t";
 			}else{
-				System.err.print(p + "  ");
+				show +="---" + "\t";
 			}
 		}
-		System.out.print("]");
+		show +="]";
 		System.out.println();
+		return show;
 	}
 	
 	public List<Poker> getOutlist() {
@@ -67,22 +92,36 @@ public class Player {
 	public void setInType(Type inType) {
 		this.inType = inType;
 	}
-	private void play(Poker p){
+	public void play(Poker p){
 		outlist.add(p);
 		p.setStatus(Poker.beforeSend);
 	}
-	public void play(int point){
-		play(new Poker(point,PokerColor.COLOR.CLUB));
+//	public void play(int point) {
+////		play(new Poker(point,PokerColor.COLOR.CLUB));
 //		for(Poker p : handslist){
 //			if(p.getPoint() == point && p.getStatus() ==Poker.ready){
 //				play(p);
 //				break;
+//			}else{
+//				try {
+//					throw new Exception("没有此牌:"+p);
+//				} catch (Exception e) {
+//					pokerDealer.cancelSending();
+//					e.printStackTrace();
+//				}
 //			}
 //		}
-	}
+//	}
 	public boolean send(Player reciever){
-		ISendMethodReQ sendMR = new SendMethodReQ(this);
-		return sendMR.send(reciever);
+		boolean flag = false;
+		try {
+			ISendMethodReQ sendMR = new SendMethodReQ(this);
+			flag = sendMR.send(reciever);
+		} catch (Exception e) {
+			pokerDealer.cancelSending();
+			e.printStackTrace();
+		}
+		return flag;
 	}
 	public boolean revieve(Type outType){
 		this.setInType(outType);
