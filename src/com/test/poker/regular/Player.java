@@ -21,6 +21,7 @@ public class Player {
 	public List<Poker> inlist = new ArrayList<Poker>();
 	public Type outType ;
 	public Type inType ;
+	public Status status = Status.begin;
 	
 	public int handSize(){
 		int i = 0 ;
@@ -93,24 +94,14 @@ public class Player {
 		this.inType = inType;
 	}
 	public void play(Poker p){
+		if(p == null){return ;}
 		outlist.add(p);
 		p.setStatus(Poker.beforeSend);
 	}
-//	public void play(int point) {
-////		play(new Poker(point,PokerColor.COLOR.CLUB));
-//		for(Poker p : handslist){
-//			if(p.getPoint() == point && p.getStatus() ==Poker.ready){
-//				play(p);
-//				break;
-//			}else{
-//				try {
-//					throw new Exception("没有此牌:"+p);
-//				} catch (Exception e) {
-//					pokerDealer.cancelSending();
-//					e.printStackTrace();
-//				}
-//			}
-//		}
+	
+//	public boolean cancel(){
+//		this.status = Status.end;
+//		return true;
 //	}
 	public boolean send(Player reciever){
 		boolean flag = false;
@@ -124,6 +115,9 @@ public class Player {
 		return flag;
 	}
 	public boolean revieve(Type outType){
+		if(outType.getPlayer().equals(this.playerName)){
+			this.setInType(null);
+		}
 		this.setInType(outType);
 		return true;
 	}

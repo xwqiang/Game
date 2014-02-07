@@ -8,6 +8,7 @@ import java.util.Collection;
 import java.util.List;
 
 import com.test.poker.Poker;
+import com.test.poker.regular.Player;
 import com.test.poker.type.Type;
 
 public class TypeValidation {
@@ -21,12 +22,14 @@ public class TypeValidation {
 			e.printStackTrace();
 		}
 	}
-	public static Type validate(List<Poker> list) {
+	public static Type validate(Player player) {
+		List<Poker> list = player.getOutlist();
 		try {
 			for(Class<Type> c : typeList){
 				if(c.newInstance().validate(list)){
 					Type type = c.newInstance();
 					type.cloneList(list);
+					type.setPlayer(player.getPlayerName());
 					return type;
 				}
 			}

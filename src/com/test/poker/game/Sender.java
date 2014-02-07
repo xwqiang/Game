@@ -16,6 +16,9 @@ public class Sender {
 		System.out.println(" [1]\t[2]\t[3]\t[4]\t[5]\t[6]\t[7]\t[8]\t[9]\t[10]\t[11]\t[12]\t[13]\t[14]\t[15]\t[16]\t[17]\t[18]\t[19]\t[20]\t[21]");
 		System.out.println("按0出牌，9放弃出牌");
 		int input=sc.nextInt();
+		if(input != 0 && input!=9){
+			System.out.println("不合法输入,请重新输入：");
+		}
 		switch(input){
 			case 0 : 
 				System.out.println("请选择您出牌的位置，用  , 号隔开,回车结束");
@@ -29,13 +32,16 @@ public class Sender {
 				}
 				player.send(reciever);
 				break;
-			case 9:break;
+			case 9 :
+				player.play(null);
+				player.send(reciever);
+				break;
 		}
 	}
-	private boolean isContinue(int i ){
-		if(i==1){ return true;}
-		return false;
-	}
+//	private boolean isContinue(int i ){
+//		if(i==1){ return true;}
+//		return false;
+//	}
 	public void show(){
 		System.out.println(player.getPlayerName()+"的牌为：\r\n"+player.showPokers());
 		System.out.println(" [1]\t[2]\t[3]\t[4]\t[5]\t[6]\t[7]\t[8]\t[9]\t[10]\t[11]\t[12]\t[13]\t[14]\t[15]\t[16]\t[17]\t[18]\t[19]\t[20]\t[21]");

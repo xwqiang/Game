@@ -5,6 +5,7 @@ import java.util.List;
 
 public class PlayerFactory {
 	private static final int PLAYMAXNUM = 3;
+	private static Integer index = 0;
 	private static List<Player> playlist = new ArrayList<Player>();
 	public static Player get(String playerName) throws Exception{
 		for(Player p : playlist){
@@ -12,7 +13,7 @@ public class PlayerFactory {
 				return p;
 			}
 		}
-		if(playlist.size()>= PLAYMAXNUM){
+		if(playlist.size() >= PLAYMAXNUM){
 			throw new Exception("players is limited to "+ PLAYMAXNUM);
 		}
 		Player player = new Player(playerName);
@@ -21,28 +22,25 @@ public class PlayerFactory {
 	}
 	
 	public static Player next(){
-		PlayerIterator it = new PlayerIterator();
-		return it.next();
+		return PlayerIterator.next();
 	}
 	public static Player now(){
-		PlayerIterator it = new PlayerIterator();
-		return it.now();
+		return PlayerIterator.now();
 	}
 	static class PlayerIterator{
-		private Integer index = 0;
-		private int MAX = playlist.size();
 		
-		public PlayerIterator(){
+		private static int MAX = playlist.size();
+		static{
 			for(int i = 0 ;i < playlist.size() ;i++){
 				if(playlist.get(i).isLandLord()){
 					index = i;
 				}
 			}
 		}
-		public Player next(){
+		public static Player next(){
 			synchronized(index){
 				index ++ ;
-				if(index > MAX){index = 0;}
+				if(index >= MAX){index = 0;}
 				
 				return playlist.get(index);
 			}
@@ -56,7 +54,7 @@ public class PlayerFactory {
 				return playlist.get(index);
 			}
 		}
-		public Player now(){
+		public static Player now(){
 			return playlist.get(index);
 		}
 	}

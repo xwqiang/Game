@@ -23,6 +23,7 @@ public abstract class Type {
 	public static final int planeWith = 120; // 飞机 - 1
 	
 	public int name = Type.illegal;
+	public String player;
 	List<Poker> list = new ArrayList<Poker>();
 
 	public abstract boolean bigger(List<Poker> list) ;
@@ -43,4 +44,12 @@ public abstract class Type {
 		return this.list.toString();
 	}
 
+	public String getPlayer() {
+		return player;
+	}
+
+	public void setPlayer(String player) {
+		this.player = player;
+	}
+	
 }

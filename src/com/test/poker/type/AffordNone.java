@@ -3,7 +3,11 @@ package com.test.poker.type;
 import java.util.List;
 
 import com.test.poker.Poker;
-
+/**
+ * 要不起
+ * @author 1207264
+ *
+ */
 public class AffordNone extends Type {
 	public AffordNone(){
 		name = Type.affordNone;

@@ -17,14 +17,15 @@ public class GameCentre {
 			e.printStackTrace();
 		}
 		Sender sender = new Sender();
-//		while(PlayerFactory.now().handSize() > 0){
-//			sender.setPlayer(PlayerFactory.now());
-//			sender.send(PlayerFactory.next());
-//		}
-		for(int i = 0 ; i< 3; i++){
-			System.out.println(PlayerFactory.now().getPlayerName());
-			System.out.println(PlayerFactory.next().getPlayerName());
+		while(PlayerFactory.now().handSize() > 0){
+			sender.setPlayer(PlayerFactory.now());
+			sender.send(PlayerFactory.next());
 		}
+		System.out.println(PlayerFactory.now()+"win!!");
+//		System.out.println(PlayerFactory.now().getPlayerName());
+//		for(int i = 0 ; i< 13; i++){
+//			System.out.println(PlayerFactory.next().getPlayerName());
+//		}
 		
 		
 		

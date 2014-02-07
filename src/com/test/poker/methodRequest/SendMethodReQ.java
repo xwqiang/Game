@@ -1,6 +1,7 @@
 package com.test.poker.methodRequest;
 
 import com.test.poker.regular.Player;
+import com.test.poker.type.AffordNone;
 import com.test.poker.type.Type;
 import com.test.poker.type.TypeWrapper;
 import com.test.poker.validate.TypeValidation;
@@ -15,42 +16,40 @@ public class SendMethodReQ implements ISendMethodReQ{
 	public SendMethodReQ(Player sender){
 		this.sender = sender;
 		//构造outType
-		Type outType = (TypeValidation.validate(sender.getOutlist()));
+		Type outType = (TypeValidation.validate(sender));
 		sender.setOutType(outType);
 	}
-	/* (non-Javadoc)
-	 * @see com.test.poker.methodRequest.ISendMethodReQ#beforeSend()
-	 */
 	
+	/**
+	 * 校验出牌是否合法  出牌是否比上家大
+	 */
 	public boolean beforeSend(Player reciever) throws Exception{
-		if(sender.getOutType()==null){
+		//不合法出牌
+		if(sender.getOutType()==null || sender.getOutType() instanceof AffordNone){
 			throw new Exception(sender.getPlayerName()+" 不合法出牌"+sender.getOutType());
 		}
-		
-		if(!canSend(reciever)){
+		//出牌太小
+		if(!biggerSending(reciever)){
 			return false;
 		}
 		return true;
 	}
-	private boolean canSend(Player reciever) {
-		boolean result = false;
-		if(sender.getInType() == null){
-			result =  true;
+	private boolean biggerSending(Player reciever) {
+		if(sender.getInType() == null || sender.getInType() instanceof AffordNone){
+			return true;
 		}else{	//接牌
 			TypeWrapper wrapper = new TypeWrapper(sender.getOutType());
 			if(wrapper.biggerThan(sender.getInType())){
-				result =  true;
+				return true;
 			}else{
 				System.err.println(sender.getPlayerName()+" 不合法出牌："+sender.getOutType());
-				result = false;
+				return false;
 			}
 		}
-		return result;
 	}
 
-	/* (non-Javadoc)
-	 * @see com.test.poker.methodRequest.ISendMethodReQ#afterSend()
-	 */
+	
+	
 	public boolean afterSend(){
 		sender.getOutlist().clear();
 		sender.getPokerDealer().confirmSending();
@@ -63,6 +62,9 @@ public class SendMethodReQ implements ISendMethodReQ{
 	public boolean send(Player reciever) throws Exception{
 		beforeSend(reciever);
 		System.out.println(sender.getPlayerName()+" 出牌："+sender.getOutType());
+		if(sender.getOutType() instanceof AffordNone){
+			reciever.revieve(sender.getInType());
+		}
 		reciever.revieve(sender.getOutType());
 		afterSend();
 		return true;
