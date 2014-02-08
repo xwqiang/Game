@@ -4,6 +4,7 @@ import com.test.poker.regular.Player;
 import com.test.poker.type.AffordNone;
 import com.test.poker.type.Type;
 import com.test.poker.type.TypeWrapper;
+import com.test.poker.type.exception.IllegalTypeException;
 import com.test.poker.validate.TypeValidation;
 
 /**
@@ -20,32 +21,8 @@ public class SendMethodReQ implements ISendMethodReQ{
 		sender.setOutType(outType);
 	}
 	
-	/**
-	 * 校验出牌是否合法  出牌是否比上家大
-	 */
-	public boolean beforeSend(Player reciever) throws Exception{
-		//不合法出牌
-		if(sender.getOutType()==null || sender.getOutType() instanceof AffordNone){
-			throw new Exception(sender.getPlayerName()+" 不合法出牌"+sender.getOutType());
-		}
-		//出牌太小
-		if(!biggerSending(reciever)){
-			return false;
-		}
+	public boolean beforeSend(Player reciever){
 		return true;
-	}
-	private boolean biggerSending(Player reciever) {
-		if(sender.getInType() == null || sender.getInType() instanceof AffordNone){
-			return true;
-		}else{	//接牌
-			TypeWrapper wrapper = new TypeWrapper(sender.getOutType());
-			if(wrapper.biggerThan(sender.getInType())){
-				return true;
-			}else{
-				System.err.println(sender.getPlayerName()+" 不合法出牌："+sender.getOutType());
-				return false;
-			}
-		}
 	}
 
 	
@@ -56,17 +33,23 @@ public class SendMethodReQ implements ISendMethodReQ{
 		return true;
 	}
 	
-	/* (non-Javadoc)
-	 * @see com.test.poker.methodRequest.ISendMethodReQ#send(com.test.poker.regular.Player)
-	 */
-	public boolean send(Player reciever) throws Exception{
-		beforeSend(reciever);
-		System.out.println(sender.getPlayerName()+" 出牌："+sender.getOutType());
-		if(sender.getOutType() instanceof AffordNone){
+	
+	public boolean send(Player reciever) throws IllegalTypeException{
+		if(!beforeSend(reciever)){return false;}
+		
+		TypeWrapper wrapper = new TypeWrapper(sender.getOutType());
+		if(sender.getInType()==null){sender.setInType(new AffordNone(sender));}
+		if(wrapper.biggerThan(sender.getInType())){
+			System.out.println(sender.getPlayerName()+" 出牌："+sender.getOutType());
+			reciever.revieve(sender.getOutType());
+			afterSend();
+			return true;
+		}else{
+			System.out.println(sender.getPlayerName()+" : 牌太小");
 			reciever.revieve(sender.getInType());
+			sender.getOutlist().clear();
+			sender.getPokerDealer().cancelSending();
+			return false;
 		}
-		reciever.revieve(sender.getOutType());
-		afterSend();
-		return true;
 	}
 }

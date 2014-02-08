@@ -11,8 +11,9 @@ public class Treble extends Type {
 		name = Type.treble;
 	}
 	@Override
-	public boolean bigger(List<Poker> list) {
-		if(this.list.get(0).getPoint()>list.get(0).getPoint()){
+	public boolean bigger(Type type) {
+		List<Poker> inList = type.getList();
+		if(this.list.get(0).getPoint() > inList.get(0).getPoint()){
 			return true;
 		}
 		return false;
@@ -21,7 +22,7 @@ public class Treble extends Type {
 	@Override
 	public boolean validate(List<Poker> list) {
 		Collections.sort(list,new SequenceSort());
-		if(list.size()==3&&list.get(0).getPoint()==list.get(2).getPoint()){
+		if(list.size()==3 && list.get(0).getPoint() == list.get(2).getPoint()){
 			return true;
 		}
 		return false;

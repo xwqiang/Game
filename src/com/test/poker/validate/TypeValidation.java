@@ -9,6 +9,7 @@ import java.util.List;
 
 import com.test.poker.Poker;
 import com.test.poker.regular.Player;
+import com.test.poker.type.IllegalType;
 import com.test.poker.type.Type;
 
 public class TypeValidation {
@@ -36,7 +37,7 @@ public class TypeValidation {
 		} catch (Exception e) {
 			e.printStackTrace();
 		} 
-		return null;
+		return new IllegalType();
 	}
 	/**
 	 *  获取同一路径下所有子类或接口实现类 

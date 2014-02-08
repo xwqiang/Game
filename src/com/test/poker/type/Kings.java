@@ -10,7 +10,7 @@ public class Kings extends Type {
 		name =Type.kings;
 	}
 	@Override
-	public boolean bigger(List<Poker> list) {
+	public boolean bigger(Type type) {
 		return true;
 	}
 

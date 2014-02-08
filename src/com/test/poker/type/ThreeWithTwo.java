@@ -11,8 +11,9 @@ public class ThreeWithTwo extends Type {
 		name = Type.threeWithTwo;
 	}
 	@Override
-	public boolean bigger(List<Poker> list) {
-		if(getMain(this.list) > getMain(list)){
+	public boolean bigger(Type type) {
+		List<Poker> inList = type.getList();
+		if(getMain(this.list) > getMain(inList)){
 			return true;
 		}
 		return false;

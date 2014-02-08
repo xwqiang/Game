@@ -11,7 +11,8 @@ public class Bomb extends Type {
 		name =Type.bomb;
 	}
 	@Override
-	public boolean bigger(List<Poker> inList) {
+	public boolean bigger(Type type) {
+		List<Poker> inList = type.getList();
 		if(this.list.get(0).getPoint()>inList.get(0).getPoint()){
 			return true;
 		}

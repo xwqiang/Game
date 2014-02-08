@@ -8,6 +8,7 @@ import com.test.poker.Poker;
 import com.test.poker.PokerColor;
 import com.test.poker.methodRequest.ISendMethodReQ;
 import com.test.poker.methodRequest.SendMethodReQ;
+import com.test.poker.type.AffordNone;
 import com.test.poker.type.Type;
 import com.test.poker.util.SequenceSort;
 
@@ -115,9 +116,6 @@ public class Player {
 		return flag;
 	}
 	public boolean revieve(Type outType){
-		if(outType.getPlayer().equals(this.playerName)){
-			this.setInType(null);
-		}
 		this.setInType(outType);
 		return true;
 	}

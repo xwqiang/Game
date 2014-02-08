@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.test.poker.Poker;
+import com.test.poker.type.exception.IllegalTypeException;
 
 public abstract class Type {
 	/**
@@ -22,11 +23,12 @@ public abstract class Type {
 	public static final int threeWithTwo = 110;// 3 - 1
 	public static final int planeWith = 120; // 飞机 - 1
 	
+	protected long time = System.currentTimeMillis();
 	public int name = Type.illegal;
 	public String player;
 	List<Poker> list = new ArrayList<Poker>();
 
-	public abstract boolean bigger(List<Poker> list) ;
+	public abstract boolean bigger(Type type) throws IllegalTypeException ;
 
 	public abstract boolean validate(List<Poker> list);
 
@@ -41,7 +43,7 @@ public abstract class Type {
 		return name;
 	}
 	public String toString() {
-		return this.list.toString();
+		return player+" : "+this.list.toString();
 	}
 
 	public String getPlayer() {

@@ -11,7 +11,8 @@ public class SequenceDouble extends Type {
 		name = Type.sequence;
 	}
 	@Override
-	public boolean bigger(List<Poker> inList) {
+	public boolean bigger(Type type) {
+		List<Poker> inList = type.getList();
 		if(this.list.size() == inList.size() && this.list.get(0).getPoint()>inList.get(0).getPoint()){
 			return true;
 		}

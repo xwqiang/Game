@@ -9,8 +9,9 @@ public class Single extends Type {
 		name  = Type.single;
 	}
 	@Override
-	public boolean bigger(List<Poker> list) {
-		if(this.list.get(0).getPoint()>list.get(0).getPoint()){
+	public boolean bigger(Type type) {
+		List<Poker> inList = type.getList();
+		if(this.list.get(0).getPoint()>inList.get(0).getPoint()){
 			return true;
 		}
 		return false;

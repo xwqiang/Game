@@ -13,7 +13,8 @@ public class Plane extends Type {
 		name =Type.bomb;
 	}
 	@Override
-	public boolean bigger(List<Poker> inList) {
+	public boolean bigger(Type type) {
+		List<Poker> inList = type.getList();
 		if(this.list.size() == inList.size() && validateType(this.list) == validateType(inList)){
 			if(getSortedTrebleList(this.list).get(0) > getSortedTrebleList(inList).get(0)){
 				return true;
