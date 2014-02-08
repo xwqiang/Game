@@ -11,14 +11,15 @@ public class Sender {
 		this.player = player;
 	}
 	public void send(Player reciever){
-		Scanner sc = new Scanner(System.in);
 		System.out.println(player.getPlayerName()+"的牌 【"+player.handSize()+"张】 为：\r\n"+player.showPokers());
 		System.out.println(" [1]\t[2]\t[3]\t[4]\t[5]\t[6]\t[7]\t[8]\t[9]\t[10]\t[11]\t[12]\t[13]\t[14]\t[15]\t[16]\t[17]\t[18]\t[19]\t[20]\t[21]");
 		System.out.print("按0出牌，9放弃出牌	" );
 		System.err.println("	- - - >" + player.getInType());
+		Scanner sc = new Scanner(System.in);
 		int input=sc.nextInt();
-		if(input != 0 && input!=9){
+		while(input != 0 && input != 9){
 			System.out.println("不合法输入,请重新输入：");
+			input=sc.nextInt();
 		}
 		switch(input){
 			case 0 : 
@@ -31,7 +32,10 @@ public class Sender {
 						player.play(poker);
 					}
 				}
-				player.send(reciever);
+				if(!player.send(reciever)){
+					System.out.println("不合法出牌,请重新选择：");
+					send(reciever);
+				}
 				break;
 			case 9 :
 				player.play(null);

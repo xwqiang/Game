@@ -42,16 +42,5 @@ public class PokerDealer {
 			}
 		}
 	}
-//	public boolean validate(List<Poker> pokers){
-//		if(pokers == null || pokers.size() ==0){return false;}
-//		int size = pokers.size();
-//		switch(size){
-//			case 1:return true;
-//			case 2:x
-//				if(pokers.get(0).getPoint()==pokers.get(1).getPoint()) return true;
-//				if(pokers.get(0).getPoint()==PokerPoint.Joker0 && pokers.get(1).getPoint()==PokerPoint.Joker1) return true;
-//				return true;
-//			default :return false;
-//		}
-//	}
+	
 }

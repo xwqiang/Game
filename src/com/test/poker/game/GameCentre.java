@@ -10,9 +10,9 @@ public class GameCentre {
 		Player yalin = null;
 		try {
 			jack = PlayerFactory.get("jack");
-			jack.setLandLord(true);
 			john = PlayerFactory.get("john");
 			yalin = PlayerFactory.get("yalin");
+			yalin.setLandLord(true);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -22,10 +22,7 @@ public class GameCentre {
 			sender.send(PlayerFactory.next());
 		}
 		System.out.println(PlayerFactory.now()+"win!!");
-//		System.out.println(PlayerFactory.now().getPlayerName());
-//		for(int i = 0 ; i< 13; i++){
-//			System.out.println(PlayerFactory.next().getPlayerName());
-//		}
+		System.exit(0);
 		
 		
 		

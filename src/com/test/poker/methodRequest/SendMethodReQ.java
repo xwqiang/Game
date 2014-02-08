@@ -45,7 +45,11 @@ public class SendMethodReQ implements ISendMethodReQ{
 			afterSend();
 			return true;
 		}else{
-			System.out.println(sender.getPlayerName()+" : 牌太小");
+			if(sender.getOutType() instanceof AffordNone){
+				System.out.println(sender.getPlayerName()+" : 放弃出牌");
+			}else{
+				System.out.println(sender.getPlayerName()+" : 牌太小或无法比较");
+			}
 			reciever.revieve(sender.getInType());
 			sender.getOutlist().clear();
 			sender.getPokerDealer().cancelSending();

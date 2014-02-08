@@ -18,10 +18,10 @@ public class Poker {
 	/**
 	 * 牌已经打出
 	 */
-	public static final int afterSend = 2;
+	public static final int afterSend = 4;
 	private PokerColor.COLOR color;
 	private int point;
-	private int status;//0 已发牌 2 准备出牌 3 弃牌 
+	private int status;//0 已发牌 2 准备出牌 4 弃牌 
 	public Poker(int point, PokerColor.COLOR color) {
 		for(int i = 0 ; i < ptInt.length ; i++){
 			if(point == ptInt[i]){

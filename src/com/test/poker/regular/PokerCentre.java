@@ -11,7 +11,7 @@ public class PokerCentre {
 	private static List<Poker> pokers = new ArrayList<Poker>();
 	private static List<Poker> pokerLeft = new ArrayList<Poker>();
 	
-	public PokerCentre(){
+	static{
 		pokers.add(new Poker(PokerPoint.A,PokerColor.COLOR.HEART));
 		pokers.add(new Poker(PokerPoint.A,PokerColor.COLOR.SPADE));
 		pokers.add(new Poker(PokerPoint.A,PokerColor.COLOR.DIAMOND));
@@ -28,9 +28,9 @@ public class PokerCentre {
 		pokers.add(new Poker(PokerPoint.THREE,PokerColor.COLOR.CLUB));
 		
 		pokers.add(new Poker(PokerPoint.FOUR,PokerColor.COLOR.HEART));
-		pokers.add(new Poker(PokerPoint.THREE,PokerColor.COLOR.SPADE));
-		pokers.add(new Poker(PokerPoint.THREE,PokerColor.COLOR.DIAMOND));
-		pokers.add(new Poker(PokerPoint.THREE,PokerColor.COLOR.CLUB));
+		pokers.add(new Poker(PokerPoint.FOUR,PokerColor.COLOR.SPADE));
+		pokers.add(new Poker(PokerPoint.FOUR,PokerColor.COLOR.DIAMOND));
+		pokers.add(new Poker(PokerPoint.FOUR,PokerColor.COLOR.CLUB));
 		
 		pokers.add(new Poker(PokerPoint.FIVE,PokerColor.COLOR.HEART));
 		pokers.add(new Poker(PokerPoint.FIVE,PokerColor.COLOR.SPADE));
